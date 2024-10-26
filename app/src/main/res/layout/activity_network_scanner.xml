@@ -9,6 +9,14 @@
         android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Network Scan Results"
+        android:paddingBottom="8dp"
+        android:text="@string/scan_results"
         android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/networkListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
 </LinearLayout>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MobileSentinel</string>
+    <string name="scan_results">Scan Results:</string>
+    <string name="wifi_scan_failed">Wi-Fi Scan Failed</string>
+    <string name="no_available_networks">No Available Networks</string>
+    <string name="app_icon_desc">Network Security Icon</string>
 </resources>

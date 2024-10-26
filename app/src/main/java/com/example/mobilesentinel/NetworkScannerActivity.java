@@ -1,87 +1,98 @@
 package com.example.mobilesentinel;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.util.ArrayList;
+import androidx.core.app.ActivityCompat;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class NetworkScannerActivity extends AppCompatActivity {
 
+    private ListView networkListView;
     private TextView resultTextView;
-    private ExecutorService executorService;
+    private WifiManager wifiManager;
+    private Handler handler;
+    private Runnable wifiScanRunnable;
+    private static final int SCAN_INTERVAL = 5000; // 5 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_scanner);
 
+        networkListView = findViewById(R.id.networkListView);
         resultTextView = findViewById(R.id.resultTextView);
-        executorService = Executors.newFixedThreadPool(10); // Thread pool for concurrent scanning
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        handler = new Handler();
 
-        // Start the network scan
-        startNetworkScan("192.168.1.");
+        // Register a broadcast receiver to listen for scan results
+        IntentFilter filter = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        registerReceiver(wifiScanReceiver, filter);
+
+        // Start the scanning process
+        startWifiScanning();
     }
 
-    private void startNetworkScan(String baseIp) {
-        List<Future<String>> futures = new ArrayList<>();
-
-        for (int i = 1; i <= 255; i++) {
-            String host = baseIp + i;
-            futures.add(executorService.submit(new PortScanTask(host, 80, 200)));
-        }
-
-        for (Future<String> future : futures) {
-            try {
-                String result = future.get();  // Get scan result
-                if (result != null) {
-                    resultTextView.append(result + "\n");
+    private void startWifiScanning() {
+        // Runnable to perform Wi-Fi scanning
+        wifiScanRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (!checkPermissions()) {
+                    ActivityCompat.requestPermissions(NetworkScannerActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                    return;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+                wifiManager.startScan();
+                handler.postDelayed(this, SCAN_INTERVAL); // Schedule next scan
             }
-        }
+        };
+        handler.post(wifiScanRunnable); // Start the first scan
     }
 
-    // Inner class for the port scanning task
-    private static class PortScanTask implements Callable<String> {
-        private final String ip;
-        private final int port;
-        private final int timeout;
+    private boolean checkPermissions() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
 
-        public PortScanTask(String ip, int port, int timeout) {
-            this.ip = ip;
-            this.port = port;
-            this.timeout = timeout;
-        }
-
+    // BroadcastReceiver to handle the Wi-Fi scan results
+    private final BroadcastReceiver wifiScanReceiver = new BroadcastReceiver() {
         @Override
-        public String call() {
-            if (isPortOpen(ip, port, timeout)) {
-                return "Open port found at: " + ip;
+        public void onReceive(Context context, Intent intent) {
+            boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+            if (success) {
+                displayScanResults();
+            } else {
+                resultTextView.setText(getString(R.string.wifi_scan_failed));
             }
-            return null;
         }
+    };
 
-        private boolean isPortOpen(String ip, int port, int timeout) {
-            try (Socket socket = new Socket()) {
-                socket.connect(new InetSocketAddress(ip, port), timeout);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+    private void displayScanResults() {
+        List<ScanResult> results = wifiManager.getScanResults();
+        if (results.isEmpty()) {
+            resultTextView.setText(getString(R.string.no_available_networks));
+            networkListView.setAdapter(null);
+        } else {
+            resultTextView.setText(""); // Clear the text
+            // Set the adapter to display the networks
+            NetworkListAdapter adapter = new NetworkListAdapter(this, results);
+            networkListView.setAdapter(adapter);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        executorService.shutdownNow(); // Shutdown executor to prevent memory leaks
+        handler.removeCallbacks(wifiScanRunnable); // Stop scanning
+        unregisterReceiver(wifiScanReceiver); // Unregister the receiver
     }
 }
