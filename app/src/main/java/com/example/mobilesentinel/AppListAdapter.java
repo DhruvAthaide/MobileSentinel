@@ -39,6 +39,9 @@ public class AppListAdapter extends ArrayAdapter<ApplicationInfo> {
         appIcon.setImageDrawable(appInfo.loadIcon(packageManager));
         appName.setText(appInfo.loadLabel(packageManager));
 
+        // Set text color based on the current theme (light/dark)
+        appName.setTextColor(getContext().getResources().getColor(R.color.textColorPrimary, getContext().getTheme()));
+
         return convertView;
     }
 }

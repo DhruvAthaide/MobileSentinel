@@ -29,6 +29,16 @@ public class TrafficSniffingActivity extends AppCompatActivity {
         outputTextView = findViewById(R.id.outputTextView);
         startButton = findViewById(R.id.startButton);
 
+        // Check if the current mode is dark mode and set text color
+        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            // Dark mode
+            outputTextView.setTextColor(getResources().getColor(R.color.textColorPrimary, getTheme()));
+        } else {
+            // Light mode
+            outputTextView.setTextColor(getResources().getColor(R.color.textColorPrimary, getTheme()));
+        }
+
         startButton.setOnClickListener(v -> startSniffing());
     }
 
