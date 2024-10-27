@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import androidx.core.content.ContextCompat;
+import android.util.TypedValue;
 import android.util.Log;
 
 public class TrafficSniffingActivity extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class TrafficSniffingActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     private TextView outputTextView;
+    private TextView textView;
     private Button startButton;
 
     @Override
@@ -33,10 +36,18 @@ public class TrafficSniffingActivity extends AppCompatActivity {
         int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
         if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
             // Dark mode
-            outputTextView.setTextColor(getResources().getColor(R.color.textColorPrimary, getTheme()));
+            textView = findViewById(R.id.outputTextView);
+            TypedValue typedValue = new TypedValue();
+            getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+            int textColor =typedValue.data; // Access data field
+            textView.setTextColor(textColor);
         } else {
             // Light mode
-            outputTextView.setTextColor(getResources().getColor(R.color.textColorPrimary, getTheme()));
+            textView = findViewById(R.id.outputTextView);
+            TypedValue typedValue = new TypedValue();
+            getTheme().resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+            int textColor = typedValue.data; // Access data field
+            textView.setTextColor(textColor);
         }
 
         startButton.setOnClickListener(v -> startSniffing());

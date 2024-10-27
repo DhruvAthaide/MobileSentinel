@@ -3,50 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:padding="16dp"
+    android:background="?android:attr/windowBackground">
 
+    <!--    Mobile Sentinel Text-->
     <TextView
         android:id="@+id/editTextText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:fontFamily="monospace"
-        android:inputType="text"
-        android:text="MOBILE SENTINEL"
+        android:text="Mobile Sentinel"
         android:textAlignment="center"
-        android:textColor="#FF1100"
-        android:textSize="34sp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:typeface="normal" />
+        android:padding="8dp"
+        android:layout_marginBottom="24dp" />
 
+    <!-- Network Scanner Button -->
     <Button
         android:id="@+id/btn_network_scanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Network Scanner" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="Network Scanner"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btn_vulnerability_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vulnerability Scanner" />
-
+    <!-- Traffic Sniffing Button -->
     <Button
         android:id="@+id/btn_traffic_sniffing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Traffic Sniffing" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="Traffic Sniffing"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
 
+    <!-- Vulnerability Scanner Button -->
     <Button
-        android:id="@+id/btn_ssh_client"
+        android:id="@+id/btn_vulnerability_scanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SSH Client" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="Vulnerability Scanner"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
 
+    <!-- Permission Analyzer Button -->
     <Button
         android:id="@+id/btn_permission_analyzer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Permission Analyzer" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="Permission Analyzer"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
+
+    <!-- SSH Client Button -->
+    <Button
+        android:id="@+id/btn_ssh_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="SSH Client"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
 
 </LinearLayout>

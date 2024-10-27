@@ -1,7 +1,9 @@
 package com.example.mobilesentinel;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Apply the Current Theme (Dark/Light)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         setContentView(R.layout.activity_main);
 
         // Initialize buttons
@@ -54,5 +58,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, PermissionAnalyzerActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Apply the Current Theme when configuration changes
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 }

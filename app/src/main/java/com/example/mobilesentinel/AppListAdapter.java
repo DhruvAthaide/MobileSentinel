@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.core.content.ContextCompat;
+import android.util.TypedValue;
 import java.util.List;
 
 public class AppListAdapter extends ArrayAdapter<ApplicationInfo> {
@@ -33,14 +34,19 @@ public class AppListAdapter extends ArrayAdapter<ApplicationInfo> {
 
         // Get views from the layout
         ImageView appIcon = convertView.findViewById(R.id.appIcon);
-        TextView appName = convertView.findViewById(R.id.appName);
+        TextView appNameTextView = convertView.findViewById(R.id.appName);
 
         // Set the app icon and name
         appIcon.setImageDrawable(appInfo.loadIcon(packageManager));
-        appName.setText(appInfo.loadLabel(packageManager));
+        appNameTextView.setText(appInfo.loadLabel(packageManager));
 
-        // Set text color based on the current theme (light/dark)
-        appName.setTextColor(getContext().getResources().getColor(R.color.textColorPrimary, getContext().getTheme()));
+        // Resolve the text color
+        TypedValue typedValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.textColor, typedValue, true);
+        int textColor = typedValue.data;
+
+        // Set the text color
+        appNameTextView.setTextColor(textColor);
 
         return convertView;
     }
