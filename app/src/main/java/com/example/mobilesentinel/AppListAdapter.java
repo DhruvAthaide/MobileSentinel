@@ -3,51 +3,61 @@ package com.example.mobilesentinel;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.core.content.ContextCompat;
-import android.util.TypedValue;
+import android.util.Log;
+import android.graphics.Color;
 import java.util.List;
 
 public class AppListAdapter extends ArrayAdapter<ApplicationInfo> {
+
     private PackageManager packageManager;
-    private List<ApplicationInfo> appList;
 
     public AppListAdapter(Context context, List<ApplicationInfo> appList) {
         super(context, 0, appList);
-        this.packageManager = context.getPackageManager();
-        this.appList = appList;
-    }
-
-    @Override
+        packageManager = context.getPackageManager();
+    }@Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_app, parent, false);
+        View view = convertView;
+
+        if (view == null) {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_app, parent, false);
         }
 
-        // Get the current app
-        ApplicationInfo appInfo = appList.get(position);
+        ApplicationInfo appInfo = getItem(position);
 
-        // Get views from the layout
-        ImageView appIcon = convertView.findViewById(R.id.appIcon);
-        TextView appNameTextView = convertView.findViewById(R.id.appName);
+        ImageView appIconImageView = view.findViewById(R.id.appIcon);
+        TextView appNameTextView = view.findViewById(R.id.appName);
 
-        // Set the app icon and name
-        appIcon.setImageDrawable(appInfo.loadIcon(packageManager));
-        appNameTextView.setText(appInfo.loadLabel(packageManager));
+        Drawable appIcon = appInfo.loadIcon(packageManager);
+        String appName = appInfo.loadLabel(packageManager).toString();
 
-        // Resolve the text color
+        appIconImageView.setImageDrawable(appIcon);
+        appNameTextView.setText(appName);
+
+        // Resolve and apply the text color from the theme
         TypedValue typedValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.textColor, typedValue, true);
-        int textColor = typedValue.data;
-
-        // Set the text color
+        boolean resolved = getContext().getTheme().resolveAttribute(android.R.attr.textColor, typedValue, true);
+        // If the Theme Color is not working then it will use the Specific Hardcoded Color
+        int textColor = resolved ? typedValue.data : Color.parseColor("#296DFF");
         appNameTextView.setTextColor(textColor);
 
-        return convertView;
+        // Log the Position and ConvertView status and Color Status for Confirmation
+        Log.d("AppListAdapter", "Position: " + position);
+        Log.d("AppListAdapter", "ConvertView is null: " + (convertView == null));
+        Log.d("AppListAdapter", "Resolved color: " + textColor);
+
+        // Set visibility of the views
+        appIconImageView.setVisibility(View.VISIBLE);
+        appNameTextView.setVisibility(View.VISIBLE);
+        // appNameTextView.setTextColor(Color.WHITE);
+
+        return view;
     }
 }

@@ -31,12 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-        <activity android:name=".NetworkScannerActivity" />
-        <activity android:name=".VulnerabilityScannerActivity" />
-        <activity android:name=".TrafficSniffingActivity" />
-        <activity android:name=".SSHClientActivity" />
-        <activity android:name=".PermissionAnalyzerActivity" />
-        <activity android:name=".AppPermissionDetailsActivity" />
+        <activity android:name=".NetworkScannerActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".VulnerabilityScannerActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".TrafficSniffingActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".SSHClientActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".PermissionAnalyzerActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".AppPermissionDetailsActivity" android:theme="@style/AppTheme" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
