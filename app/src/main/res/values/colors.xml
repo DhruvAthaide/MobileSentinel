@@ -9,7 +9,7 @@
     <color name="light_page_background">#FFFFFF</color>
     <color name="light_page_header">#1A3D75</color>
     <color name="light_page_button">#95A5A6</color>
-    <color name="light_page_text">#DEE2E6</color>
+    <color name="light_page_text">#000000</color>
     <color name="dark_page_background">#1F1F1F</color>
     <color name="dark_page_header">#296DFF</color>
     <color name="dark_page_button">#80A8FF</color>
