@@ -8,7 +8,7 @@ import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.res.Configuration; // Add this import
+import android.content.res.Configuration;
 
 public class AppPermissionDetailsActivity extends AppCompatActivity {
     private LinearLayout layoutPermissions;
