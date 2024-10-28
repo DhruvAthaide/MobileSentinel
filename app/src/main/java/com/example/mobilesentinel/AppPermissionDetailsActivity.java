@@ -4,10 +4,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.res.Configuration; // Add this import
 
 public class AppPermissionDetailsActivity extends AppCompatActivity {
     private LinearLayout layoutPermissions;
@@ -25,18 +26,28 @@ public class AppPermissionDetailsActivity extends AppCompatActivity {
         try {
             PackageInfo packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
 
-            // Display permissions
+            // Displaying the Application's Permissions
             if (packageInfo.requestedPermissions != null) {
                 for (String permission : packageInfo.requestedPermissions) {
                     TextView textView = new TextView(this);
                     textView.setText(permission);
 
-                    // Example logic to determine if a permission is unnecessary (customize as needed)
+                    // Logic to determine if the permission is considered unnecessary
                     if (isUnnecessaryPermission(permission)) {
-                        textView.setTextColor(Color.RED);
+                        textView.setTextColor(Color.RED); // Set text color to RED for unnecessary permissions
                     } else {
-                        textView.setTextColor(Color.BLACK);
+                        // Check if the current theme is light or dark
+                        boolean isLightTheme = isLightTheme();
+
+                        // Set the text color based on the current theme
+                        if (isLightTheme) {
+                            textView.setTextColor(Color.parseColor("#000000")); // Light theme color
+                        } else {
+                            textView.setTextColor(Color.parseColor("#EBEBEB")); // Dark theme color
+                        }
                     }
+
+                    // Add the TextView to the layout for permissions
                     layoutPermissions.addView(textView);
                 }
             }
@@ -45,9 +56,31 @@ public class AppPermissionDetailsActivity extends AppCompatActivity {
         }
     }
 
+    // Method to determine if the permission is unnecessary
     private boolean isUnnecessaryPermission(String permission) {
-        // Define your own criteria for unnecessary permissions
-        // Example: Mark permissions related to contacts, location, or SMS as unnecessary
-        return permission.contains("CONTACTS") || permission.contains("LOCATION") || permission.contains("SMS");
+        // Defining unnecessary permissions
+        return permission.contains("CONTACTS") ||
+                permission.contains("LOCATION") ||
+                permission.contains("SMS") ||
+                permission.contains("CALENDAR") ||
+                permission.contains("CAMERA") ||
+                permission.contains("MICROPHONE") ||
+                permission.contains("STORAGE") ||
+                permission.contains("PHONE") ||
+                permission.contains("SENSORS") ||
+                permission.contains("BLUETOOTH") ||
+                permission.contains("BODY_SENSORS") ||
+                permission.contains("CALL_LOG") ||
+                permission.contains("READ_EXTERNAL_STORAGE") ||
+                permission.contains("WRITE_EXTERNAL_STORAGE") ||
+                permission.contains("RECORD_AUDIO");
+    }
+
+    // Method to determine if the current theme is light
+    private boolean isLightTheme() {
+        // Get the current night mode
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Return true if the current mode is not night (i.e., light mode)
+        return nightModeFlags != Configuration.UI_MODE_NIGHT_YES;
     }
 }
