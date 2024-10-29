@@ -41,6 +41,16 @@ public class NetworkScannerActivity extends AppCompatActivity {
 
         // Start the scanning process
         startWifiScanning();
+
+        // Allows the WiFi Network to be Clickable to show the Wifi Details
+        networkListView.setOnItemClickListener((parent, view, position, id) -> {
+            ScanResult selectedNetwork = (ScanResult) parent.getItemAtPosition(position);
+
+            Intent intent = new Intent(NetworkScannerActivity.this, WifiDetailsActivity.class);
+            intent.putExtra("WIFI_NAME", selectedNetwork.SSID); // Updated key
+            intent.putExtra("CAPABILITIES", selectedNetwork.capabilities); // Updated key
+            startActivity(intent);
+        });
     }
 
     private void startWifiScanning() {
