@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+    </style>
+
+    <!--  Application Based Light Theme  -->
+    <style name="AppTheme.Light">
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimaryDark">@color/light_primary_dark</item>
+        <item name="colorAccent">@color/light_accent</item>
+        <item name="android:windowBackground">@color/light_page_background</item>
+        <item name="android:textColor">@color/light_page_text</item>
+        <item name="colorControlHighlight">@color/light_page_button</item>
+    </style>
+
+    <!--  Application Based Dark Theme  -->
+    <style name="AppTheme.Dark">
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryDark">@color/dark_primary_dark</item>
+        <item name="colorAccent">@color/dark_accent</item>
+        <item name="android:windowBackground">@color/dark_page_background</item>
+        <item name="android:textColor">@color/dark_page_text</item>
+        <item name="colorControlHighlight">@color/dark_page_button</item>
+
+    </style>
+</resources>

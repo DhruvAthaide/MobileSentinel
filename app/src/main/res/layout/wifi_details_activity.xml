@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:windowBackground">
+
+    <!-- Network Name -->
+    <TextView
+        android:id="@+id/wifiName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WiFi Network"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#296DFF"
+        android:paddingBottom="8dp" />
+
+    <!-- Security Type Label -->
+    <TextView
+        android:id="@+id/securityTypeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Security Type:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#296DFF"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+
+    <!-- Security Type -->
+    <TextView
+        android:id="@+id/securityType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WPA2"
+        android:textSize="16sp"
+        android:textColor="#296DFF"
+        android:paddingBottom="8dp" />
+
+    <!-- Network Mode Label -->
+    <TextView
+        android:id="@+id/networkModeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Network Mode:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#296DFF"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+
+    <!-- Network Mode -->
+    <TextView
+        android:id="@+id/networkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="802.11n"
+        android:textSize="16sp"
+        android:textColor="#296DFF"
+        android:paddingBottom="8dp" />
+
+    <!-- ScrollView for Terminal Output -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/networkMode"
+        android:layout_marginBottom="16dp">
+
+        <!-- TextView inside ScrollView for displaying terminal output -->
+        <TextView
+            android:id="@+id/terminalOutput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terminal Output"
+            android:textSize="14sp"
+            android:padding="8dp" />
+    </ScrollView>
+
+    <!-- Start WiFi Cracker Button -->
+    <Button
+        android:id="@+id/startWifiCrackerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_wifi_cracker"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:layout_marginTop="24dp" />
+</LinearLayout>
