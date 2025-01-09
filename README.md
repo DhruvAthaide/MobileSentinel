@@ -16,6 +16,8 @@ Keep in mind, this application is only to be used for Educational purposes!</p>
 - Mobile Network Traffic Sniffer
 - SSH Client
 - Application Permission Analyzer
+- Password Generator
+- Port Scanner
 
 ## Future Features: 
 - Wifi Cracking (Live Network Scanner)
@@ -41,6 +43,13 @@ Keep in mind, this application is only to be used for Educational purposes!</p>
 
 <p style="text-align: justify;">The Permission Analyzer is a Feature that lists out all the applications currently installed in the user's phone and the user can then check out all the permissions that that application is allowed and the Feature also highlights the permissions that are not necessary for that application. This brings the user's attention to applications that might be performing illegal or stealthy moves to steal the data on the Android Phone.</p>
 
+### Password Generator
+
+<p style="text-align: justify;">The Password Generator is a Feature that allows the user to generate a unique password using the different options provided such as the length of the password, what characters to include in the password or what symbols to include in the password, not to include duplicates in the password, etc.</p>
+
+### Port Scanner
+
+<p style="text-align: justify;">The Port Scanner is a Feature that allows the user to check all the ports on the Android Phone and see which port is open and might be transmitting information to an attacker. This is helpful as it helps the user understand whether their phone's information might be transmitting or not.</p>
 
 ## Badges
 
