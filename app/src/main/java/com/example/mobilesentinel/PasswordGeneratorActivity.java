@@ -1,11 +1,14 @@
 package com.example.mobilesentinel;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +20,7 @@ public class PasswordGeneratorActivity extends AppCompatActivity {
     private SeekBar seekBarLength;
     private TextView tvLength;
     private CheckBox cbIncludeLowercase, cbIncludeUppercase, cbIncludeNumbers, cbIncludeSymbols, cbExcludeDuplicates, cbIncludeSpaces;
-    private Button btnGenerate;
+    private Button btnGenerate, btnCopy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class PasswordGeneratorActivity extends AppCompatActivity {
         cbExcludeDuplicates = findViewById(R.id.cbExcludeDuplicates);
         cbIncludeSpaces = findViewById(R.id.cbIncludeSpaces);
         btnGenerate = findViewById(R.id.btnGenerate);
+        btnCopy = findViewById(R.id.btnCopy);
 
         // Update password length text as the slider moves
         seekBarLength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -63,6 +67,20 @@ public class PasswordGeneratorActivity extends AppCompatActivity {
 
             String password = generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols, excludeDuplicates, includeSpaces);
             etPassword.setText(password);
+        });
+
+        // Copy Password to Clipboard
+        btnCopy.setOnClickListener(v -> {
+            String password = etPassword.getText().toString();
+            if (!password.isEmpty()) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Generated Password", password);
+                clipboard.setPrimaryClip(clip);
+
+                Toast.makeText(PasswordGeneratorActivity.this, "Password copied to clipboard!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PasswordGeneratorActivity.this, "No password to copy!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
