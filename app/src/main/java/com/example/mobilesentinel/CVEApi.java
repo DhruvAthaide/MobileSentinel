@@ -6,5 +6,5 @@ import retrofit2.http.Query;
 
 public interface CVEApi {
     @GET("cve")
-    Call<CVEResponse> getVulnerabilities(@Query("keywordSearch") String keyword);
+    Call<CVEResponse> getVulnerabilitiesByCpe(@Query("cpeName") String cpeName);
 }

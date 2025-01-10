@@ -13,13 +13,13 @@ public class CVEResponse {
         this.vulnerabilities = vulnerabilities;
     }
 
-    // Define the nested Vulnerability class inside CVEResponse or as a separate file
     public static class Vulnerability {
         private String cveId;
         private String description;
         private String publishedDate;
         private String lastModifiedDate;
-        private double cvssScore;
+        private String severity; // New field for severity
+        private String cvssMetrics; // New field for CVSS metrics
 
         // Getters and setters
         public String getCveId() {
@@ -54,12 +54,20 @@ public class CVEResponse {
             this.lastModifiedDate = lastModifiedDate;
         }
 
-        public double getCvssScore() {
-            return cvssScore;
+        public String getSeverity() {
+            return severity;
         }
 
-        public void setCvssScore(double cvssScore) {
-            this.cvssScore = cvssScore;
+        public void setSeverity(String severity) {
+            this.severity = severity;
+        }
+
+        public String getCvssMetrics() {
+            return cvssMetrics;
+        }
+
+        public void setCvssMetrics(String cvssMetrics) {
+            this.cvssMetrics = cvssMetrics;
         }
     }
 }
