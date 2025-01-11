@@ -6,9 +6,13 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.ScrollView;
 import android.widget.Toast;
-//import com.chaquo.python.Python;
-//import com.chaquo.python.PyObject;
 import androidx.appcompat.app.AppCompatActivity;
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class WifiDetailsActivity extends AppCompatActivity {
 
@@ -26,11 +30,11 @@ public class WifiDetailsActivity extends AppCompatActivity {
 
         // Initialize UI components
         wifiNameTextView = findViewById(R.id.wifiName);
-        securityTypeTextView = findViewById(R.id.securityType); // To be Coded Later
-        networkModeTextView = findViewById(R.id.networkMode); // To be Coded Later
-        terminalOutput = findViewById(R.id.terminalOutput); // To be Coded Later
-        startWifiCrackerButton = findViewById(R.id.startWifiCrackerButton); // To be Coded Later
-        scrollView = findViewById(R.id.scrollView); // To be Coded Later
+        securityTypeTextView = findViewById(R.id.securityType);
+        networkModeTextView = findViewById(R.id.networkMode);
+        terminalOutput = findViewById(R.id.terminalOutput);
+        startWifiCrackerButton = findViewById(R.id.startWifiCrackerButton);
+        scrollView = findViewById(R.id.scrollView);
 
         // Get WiFi data from Intent
         String wifiName = getIntent().getStringExtra("WIFI_NAME");
@@ -40,14 +44,12 @@ public class WifiDetailsActivity extends AppCompatActivity {
         displayWifiInfo(wifiName, capabilities);
 
         // Set up button to start WiFi cracking
-        startWifiCrackerButton.setOnClickListener(view -> startWiFiCrackingProcess());
+        startWifiCrackerButton.setOnClickListener(view -> startWiFiCrackingProcess(wifiName));
     }
 
     private void displayWifiInfo(String wifiName, String capabilities) {
-        // Display WiFi name with fallback text
         wifiNameTextView.setText(wifiName != null && !wifiName.isEmpty() ? wifiName : "WiFi Name Unavailable");
 
-        // Interpret and display security type and network mode
         if (capabilities != null) {
             if (capabilities.contains("WPA2")) {
                 securityTypeTextView.setText("WPA2 (Secure)");
@@ -67,28 +69,74 @@ public class WifiDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void startWiFiCrackingProcess() {
+    private void startWiFiCrackingProcess(String wifiName) {
+        if (wifiName == null || wifiName.isEmpty()) {
+            Toast.makeText(this, "WiFi name is missing. Unable to start cracking process.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        Python py = Python.getInstance();
+        PyObject wifiCrackModule = py.getModule("wifi_crack");
+
+        String wordlistPath;
+        try {
+            // Open the wordlist file from assets
+            InputStream inputStream = getAssets().open("wordlist.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            // Read the wordlist file line by line
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            reader.close();
+            wordlistPath = content.toString();
+        } catch (IOException e) {
+            // Handle the exception and notify the user
+            updateTerminalOutput("Error reading wordlist file: " + e.getMessage() + "\n");
+            return;
+        }
+
+        updateTerminalOutput("Starting WiFi cracking for network: " + wifiName + "\n");
+
+        // Run the cracking process
+        try {
+            PyObject result = wifiCrackModule.callAttr("crack_wifi_password", wifiName, wordlistPath);
+            if (result != null) {
+                String successMessage = "Success! Password for network '" + wifiName + "' is: " + result.toString() + "\n";
+                updateTerminalOutput(successMessage);
+            } else {
+                updateTerminalOutput("Failed to crack the password for network: " + wifiName + "\n");
+            }
+        } catch (Exception e) {
+            updateTerminalOutput("Error during WiFi cracking: " + e.getMessage() + "\n");
+        }
     }
 
-    private void sendCommandToTermux(String command) {
-        Intent termuxIntent = new Intent("com.termux.RUN_COMMAND");
-        termuxIntent.setPackage("com.termux");
-        termuxIntent.putExtra("com.termux.RUN_COMMAND_PATH", "/data/data/com.termux/files/usr/bin/bash");
-        termuxIntent.putExtra("com.termux.RUN_COMMAND_ARGUMENTS", new String[]{"-c", command});
-        termuxIntent.putExtra("com.termux.RUN_COMMAND_BACKGROUND", true);
-
+    private String getWordlistFromAssets() {
         try {
-            startActivity(termuxIntent);
-            updateTerminalOutput("Running command: " + command + "\n");
+            InputStream inputStream = getAssets().open("wordlist.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            reader.close();
+            return content.toString();
         } catch (Exception e) {
-            Toast.makeText(this, "Error starting Termux: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            updateTerminalOutput("Error reading wordlist: " + e.getMessage() + "\n");
+            e.printStackTrace();
+            return null;
         }
     }
 
     private void updateTerminalOutput(String message) {
         terminalOutput.append(message);
-        // Automatically scroll to the latest message
         scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
     }
 }

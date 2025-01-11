@@ -34,7 +34,7 @@
         android:id="@+id/securityType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WPA2"
+        android:text="Security Type"
         android:textSize="16sp"
         android:textColor="#296DFF"
         android:paddingBottom="8dp" />
@@ -56,7 +56,7 @@
         android:id="@+id/networkMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="802.11n"
+        android:text="Network Mode"
         android:textSize="16sp"
         android:textColor="#296DFF"
         android:paddingBottom="8dp" />
@@ -84,7 +84,7 @@
         android:id="@+id/startWifiCrackerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start_wifi_cracker"
+        android:text="Start WiFi Cracker"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         android:backgroundTint="?attr/colorPrimary"

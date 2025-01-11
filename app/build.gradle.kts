@@ -36,6 +36,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions += "pyVersion"
+    productFlavors {
+        create("py310") { dimension = "pyVersion" }
+        create("py311") { dimension = "pyVersion" }
+    }
+}
+
+chaquopy {
+    productFlavors {
+        getByName("py310") { version = "3.10" }
+        getByName("py311") { version = "3.11" }
+    }
 }
 
 dependencies {
