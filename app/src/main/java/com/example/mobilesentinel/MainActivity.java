@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPermissionAnalyzer;
     private Button btnPasswordGenerator;
     private Button btnPortScanner;
+    private Button btnAntiKeylogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnPermissionAnalyzer = findViewById(R.id.btn_permission_analyzer);
         btnPasswordGenerator = findViewById(R.id.btn_password_generator);
         btnPortScanner = findViewById(R.id.btn_port_scanner);
+        btnAntiKeylogger = findViewById(R.id.btn_antikeylogger);
 
         // Set OnClickListener for Network Scanner button
         btnNetworkScanner.setOnClickListener(view -> {
@@ -72,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         // Set OnClickListener for Port Scanner button
         btnPortScanner.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, PortScannerActivity.class);
+            startActivity(intent);
+        });
+
+        // Set OnClickListener for Anti-Keylogger button
+        btnAntiKeylogger.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, AntiKeyloggerActivity.class);
             startActivity(intent);
         });
     }

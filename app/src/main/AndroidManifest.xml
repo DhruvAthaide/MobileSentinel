@@ -21,6 +21,8 @@
     <!--  Storage Permissions (Read and Write)  -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--  Anti-Keylogger Permissions  -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -33,24 +35,39 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
 
-        <activity android:name=".NetworkScannerActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".VulnerabilityScannerActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".TrafficSniffingActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".SSHClientActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".PermissionAnalyzerActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".AppPermissionDetailsActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".WifiDetailsActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".PasswordGeneratorActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".PortScannerActivity" android:theme="@style/AppTheme" />
+        <!-- Accessibility Service -->
+        <service
+            android:name=".AntiKeyloggerAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="false"> <!-- Set explicitly -->
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
 
+        <!-- Activities -->
+        <activity android:name=".NetworkScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".VulnerabilityScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".TrafficSniffingActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".SSHClientActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".PermissionAnalyzerActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".AppPermissionDetailsActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".WifiDetailsActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".PasswordGeneratorActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".PortScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".AntiKeyloggerActivity" android:theme="@style/AppTheme" android:exported="false" />
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"> <!-- This must be true since it launches the app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

@@ -108,4 +108,16 @@
         android:textColor="?android:attr/textColorPrimaryInverse"
         android:textSize="18sp" />
 
+    <!-- Anti Keylogger Button -->
+    <Button
+        android:id="@+id/btn_antikeylogger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="Anti-Keylogger"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="18sp" />
+
 </LinearLayout>

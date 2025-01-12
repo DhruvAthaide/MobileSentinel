@@ -7,4 +7,5 @@
     <string name="security_type_label">Security Type:</string>
     <string name="network_mode_label">Network Mode:</string>
     <string name="start_wifi_cracker">Start WiFi Cracker</string>
+    <string name="accessibility_service_description">Detects suspicious keylogging activities.</string>
 </resources>
