@@ -4,36 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#021526">
 
     <EditText
         android:id="@+id/edtHostname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hostname" />
+        android:hint="Hostname"
+        android:textColor="#EEEEEE"
+        android:textColorHint="#EEEEEE" />
 
     <EditText
         android:id="@+id/edtUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:hint="Username"
+        android:textColor="#EEEEEE"
+        android:textColorHint="#EEEEEE" />
 
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="#EEEEEE"
+        android:textColorHint="#EEEEEE" />
 
     <Button
         android:id="@+id/connectButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect" />
+        android:text="Connect"
+        android:backgroundTint="#2F58CD"
+        android:textColor="#EEEEEE" />
 
     <TextView
         android:id="@+id/outputTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Output" />
+        android:text="SSH Output"
+        android:textColor="#EEEEEE" />
 </LinearLayout>

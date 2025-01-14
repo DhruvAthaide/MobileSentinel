@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#021526" >
 
+    <!-- Traffic Sniffing Text -->
+    <TextView
+        android:id="@+id/trafficSniffingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Traffic Sniffing"
+        android:textAlignment="center"
+        android:textColor="#EEEEEE"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Traffic Sniffing Application Title" />
+
+    <!-- Captured Packets Output -->
     <TextView
         android:id="@+id/outputTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Captured Packets will appear here."
-        android:background="#EEEEEE"
+        android:background="#6988DD"
+        android:textColor="#EEEEEE"
         android:scrollbars="vertical"
         android:layout_above="@+id/startButton"
         android:textSize="14sp"/>
 
+    <!-- Start Sniffing Button -->
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
@@ -21,6 +42,8 @@
         android:text="Start Sniffing"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:backgroundTint="#2F58CD"
+        android:textColor="#EEEEEE" />
 
 </RelativeLayout>
