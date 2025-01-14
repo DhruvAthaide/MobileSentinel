@@ -36,31 +36,21 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions.add("pyVersion")
+    flavorDimensions += "pyVersion"
     productFlavors {
-        create("py310") {
-            dimension = "pyVersion"
-        }
-        create("py311") {
-            dimension = "pyVersion"
-        }
+        create("py310") { dimension = "pyVersion" }
+        create("py311") { dimension = "pyVersion" }
     }
 }
 
 chaquopy {
     productFlavors {
-        getByName("py310") {
-            version = "3.10"
-        }
-        getByName("py311") {
-            version = "3.11"
-        }
+        getByName("py310") { version = "3.10" }
+        getByName("py311") { version = "3.11" }
     }
-    
 }
 
 dependencies {
-    implementation("com.chaquo.python:gradle:10.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.jcraft:jsch:0.1.55")
