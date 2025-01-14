@@ -4,24 +4,22 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
     </style>
 
-    <!--  Application Based Light Theme  -->
-    <style name="AppTheme.Light">
-        <item name="colorPrimary">@color/light_primary</item>
-        <item name="colorPrimaryDark">@color/light_primary_dark</item>
-        <item name="colorAccent">@color/light_accent</item>
-        <item name="android:windowBackground">@color/light_page_background</item>
-        <item name="android:textColor">@color/light_page_text</item>
-        <item name="colorControlHighlight">@color/light_page_button</item>
-    </style>
+<!--    &lt;!&ndash;  Application Based Light Theme  &ndash;&gt;-->
+<!--    <style name="AppTheme.Light">-->
+<!--        <item name="android:windowBackground">@color/light_background</item>-->
+<!--        <item name="colorPrimary">@color/light_Header</item>-->
+<!--        <item name="android:textColor">@color/light_Text</item>-->
+<!--        <item name="colorButtonNormal">@color/light_ButtonBackground</item>-->
+<!--        <item name="colorContainer">@color/light_ListBackground</item>-->
+<!--    </style>-->
 
-    <!--  Application Based Dark Theme  -->
-    <style name="AppTheme.Dark">
-        <item name="colorPrimary">@color/dark_primary</item>
-        <item name="colorPrimaryDark">@color/dark_primary_dark</item>
-        <item name="colorAccent">@color/dark_accent</item>
-        <item name="android:windowBackground">@color/dark_page_background</item>
-        <item name="android:textColor">@color/dark_page_text</item>
-        <item name="colorControlHighlight">@color/dark_page_button</item>
+<!--    &lt;!&ndash;  Application Based Dark Theme  &ndash;&gt;-->
+<!--    <style name="AppTheme.Dark">-->
+<!--        <item name="android:windowBackground">@color/dark_background</item>-->
+<!--        <item name="colorPrimary">@color/dark_Header</item>-->
+<!--        <item name="android:textColor">@color/dark_Text</item>-->
+<!--        <item name="colorButtonNormal">@color/dark_ButtonBackground</item>-->
+<!--        <item name="colorContainer">@color/dark_ListBackground</item>-->
 
-    </style>
+<!--    </style>-->
 </resources>

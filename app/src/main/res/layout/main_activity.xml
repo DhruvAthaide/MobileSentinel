@@ -1,123 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?android:attr/windowBackground">
+    android:background="#021526">
 
-    <!--    Mobile Sentinel Text-->
-    <TextView
-        android:id="@+id/editTextText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="MobileSentinel"
-        android:textAlignment="center"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:layout_marginBottom="24dp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
 
-    <!-- Network Scanner Button -->
-    <Button
-        android:id="@+id/btn_network_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Network Scanner"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+        <!-- Mobile Sentinel Text -->
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="MobileSentinel"
+            android:textAlignment="center"
+            android:textColor="#EEEEEE"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="Mobile Sentinel application title" />
 
-    <!-- Traffic Sniffing Button -->
-    <Button
-        android:id="@+id/btn_traffic_sniffing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Traffic Sniffing"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+        <!-- Buttons Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-    <!-- Vulnerability Scanner Button -->
-    <Button
-        android:id="@+id/btn_vulnerability_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Vulnerability Scanner"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- Network Scanner Button -->
+            <Button
+                android:id="@+id/btn_network_scanner"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Network Scanner"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Network Scanner feature" />
 
-    <!-- Permission Analyzer Button -->
-    <Button
-        android:id="@+id/btn_permission_analyzer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Permission Analyzer"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- Traffic Sniffing Button -->
+            <Button
+                android:id="@+id/btn_traffic_sniffing"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Traffic Sniffer"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Traffic Sniffing feature" />
 
-    <!-- SSH Client Button -->
-    <Button
-        android:id="@+id/btn_ssh_client"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="SSH Client"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- Vulnerability Scanner Button -->
+            <Button
+                android:id="@+id/btn_vulnerability_scanner"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Vulnerability Scanner"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Vulnerability Scanner feature" />
 
-    <!-- Password Generator Button -->
-    <Button
-        android:id="@+id/btn_password_generator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Password Generator"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- Permission Analyzer Button -->
+            <Button
+                android:id="@+id/btn_permission_analyzer"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Permission Analyzer"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Permission Analyzer feature" />
 
-    <!-- Port Scanner Button -->
-    <Button
-        android:id="@+id/btn_port_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Port Scanner"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- SSH Client Button -->
+            <Button
+                android:id="@+id/btn_ssh_client"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="SSH Client"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access SSH Client feature" />
 
-    <!-- Anti Keylogger Button -->
-    <Button
-        android:id="@+id/btn_antikeylogger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="12dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:text="Anti-Keylogger"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="18sp" />
+            <!-- Password Generator Button -->
+            <Button
+                android:id="@+id/btn_password_generator"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Password Generator"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Password Generator feature" />
 
-</LinearLayout>
+            <!-- Port Scanner Button -->
+            <Button
+                android:id="@+id/btn_port_scanner"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Port Scanner"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Port Scanner feature" />
+
+            <!-- Anti Keylogger Button -->
+            <Button
+                android:id="@+id/btn_antikeylogger"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Anti-Keylogger"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Anti-Keylogger feature" />
+
+            <!-- Encrypted Vault Button -->
+            <Button
+                android:id="@+id/btn_encrypted_vault"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Encrypted Vault"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to access Encrypted Vault feature" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

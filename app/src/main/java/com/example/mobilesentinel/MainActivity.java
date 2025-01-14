@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPasswordGenerator;
     private Button btnPortScanner;
     private Button btnAntiKeylogger;
+    private Button btnEncryptedVault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnPasswordGenerator = findViewById(R.id.btn_password_generator);
         btnPortScanner = findViewById(R.id.btn_port_scanner);
         btnAntiKeylogger = findViewById(R.id.btn_antikeylogger);
+        btnEncryptedVault = findViewById(R.id.btn_encrypted_vault);
 
         // Set OnClickListener for Network Scanner button
         btnNetworkScanner.setOnClickListener(view -> {
@@ -80,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         // Set OnClickListener for Anti-Keylogger button
         btnAntiKeylogger.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AntiKeyloggerActivity.class);
+            startActivity(intent);
+        });
+
+        // Set OnClickListener for Encrypted Vault button
+        btnEncryptedVault.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, EncryptedVaultActivity.class);
             startActivity(intent);
         });
     }

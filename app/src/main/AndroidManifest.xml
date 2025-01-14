@@ -49,21 +49,21 @@
         </service>
 
         <!-- Activities -->
-        <activity android:name=".NetworkScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".VulnerabilityScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".TrafficSniffingActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".SSHClientActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".PermissionAnalyzerActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".AppPermissionDetailsActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".WifiDetailsActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".PasswordGeneratorActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".PortScannerActivity" android:theme="@style/AppTheme" android:exported="false" />
-        <activity android:name=".AntiKeyloggerActivity" android:theme="@style/AppTheme" android:exported="false" />
+        <activity android:name=".NetworkScannerActivity" android:exported="false" />
+        <activity android:name=".VulnerabilityScannerActivity" android:exported="false" />
+        <activity android:name=".TrafficSniffingActivity" android:exported="false" />
+        <activity android:name=".SSHClientActivity" android:exported="false" />
+        <activity android:name=".PermissionAnalyzerActivity" android:exported="false" />
+        <activity android:name=".AppPermissionDetailsActivity" android:exported="false" />
+        <activity android:name=".WifiDetailsActivity" android:exported="false" />
+        <activity android:name=".PasswordGeneratorActivity" android:exported="false" />
+        <activity android:name=".PortScannerActivity" android:exported="false" />
+        <activity android:name=".AntiKeyloggerActivity" android:exported="false" />
 
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"> <!-- This must be true since it launches the app -->
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

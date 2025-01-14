@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="light_primary">#1A3D75</color>
-    <color name="light_primary_dark">#000000</color>
-    <color name="light_accent">#95A5A6</color>
-    <color name="dark_primary">#296DFF</color>
-    <color name="dark_primary_dark">#000000</color>
-    <color name="dark_accent">#80A8FF</color>
-    <color name="light_page_background">#FFFFFF</color>
-    <color name="light_page_header">#1A3D75</color>
-    <color name="light_page_button">#95A5A6</color>
-    <color name="light_page_text">#000000</color>
-    <color name="dark_page_background">#1F1F1F</color>
-    <color name="dark_page_header">#296DFF</color>
-    <color name="dark_page_button">#80A8FF</color>
-    <color name="dark_page_text">#EBEBEB</color>
+<!--    &lt;!&ndash;Light Theme Colors&ndash;&gt;-->
+<!--    <color name="light_background">#CDD7FF</color>-->
+<!--    <color name="light_Header">#272727</color>-->
+<!--    <color name="light_Text">#272727</color>-->
+<!--    <color name="light_ButtonBackground">#87A2FF</color>-->
+<!--    <color name="light_ListBackground">#EBEFFF</color>-->
+
+<!--    &lt;!&ndash;Dark Theme Colors&ndash;&gt;-->
+<!--    <color name="dark_background">#021526</color>-->
+<!--    <color name="dark_Header">#EEEEEE</color>-->
+<!--    <color name="dark_Text">#EEEEEE</color>-->
+<!--    <color name="dark_ButtonBackground">#2F58CD</color>-->
+<!--    <color name="dark_ListBackground">#EBEFFF</color>-->
 </resources>

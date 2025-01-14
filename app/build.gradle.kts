@@ -16,10 +16,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Pasted this for Running Chaquo for Python in Android Studio
         ndk {
-            // On Apple silicon, you can omit x86_64.
-            abiFilters += listOf("arm64-v8a", "x86_64")
+            abiFilters.addAll(listOf("arm64-v8a", "x86_64"))
         }
     }
 
@@ -32,33 +30,44 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions += "pyVersion"
+    flavorDimensions.add("pyVersion")
     productFlavors {
-        create("py310") { dimension = "pyVersion" }
-        create("py311") { dimension = "pyVersion" }
+        create("py310") {
+            dimension = "pyVersion"
+        }
+        create("py311") {
+            dimension = "pyVersion"
+        }
     }
 }
 
 chaquopy {
     productFlavors {
-        getByName("py310") { version = "3.10" }
-        getByName("py311") { version = "3.11" }
+        getByName("py310") {
+            version = "3.10"
+        }
+        getByName("py311") {
+            version = "3.11"
+        }
     }
+    
 }
 
 dependencies {
+    implementation("com.chaquo.python:gradle:10.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.jcraft:jsch:0.1.55")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("com.google.android.material:material:1.8.0")
+    implementation("com.google.android.material:material:1.8.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
