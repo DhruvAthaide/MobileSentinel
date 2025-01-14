@@ -1,6 +1,5 @@
 package com.example.mobilesentinel;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,9 +7,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.List;
+import java.util.Arrays;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 
@@ -60,14 +59,30 @@ public class AntiKeyloggerActivity extends AppCompatActivity {
         PackageManager packageManager = getPackageManager();
         StringBuilder suspiciousApps = new StringBuilder();
 
+        List<String> trustedApps = Arrays.asList(
+                "com.google.android.apps.accessibility",
+                "com.facebook.messenger",
+                "com.microsoft.teams"
+        ); // Add package names of trusted apps here
+
         for (PackageInfo packageInfo : packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS)) {
             if (packageInfo.requestedPermissions != null) {
+                boolean isSuspicious = false;
+
                 for (String permission : packageInfo.requestedPermissions) {
-                    if (permission.equals("android.permission.BIND_ACCESSIBILITY_SERVICE") ||
-                            permission.equals("android.permission.SYSTEM_ALERT_WINDOW")) {
-                        suspiciousApps.append(packageInfo.packageName).append("\n");
-                        Log.d(TAG, "Suspicious app detected: " + packageInfo.packageName);
+                    if ((permission.equals("android.permission.BIND_ACCESSIBILITY_SERVICE") ||
+                            permission.equals("android.permission.SYSTEM_ALERT_WINDOW")) &&
+                            !trustedApps.contains(packageInfo.packageName)) {
+                        isSuspicious = true;
                     }
+                }
+
+                if (isSuspicious) {
+                    suspiciousApps.append(packageInfo.packageName)
+                            .append(" (")
+                            .append(packageInfo.applicationInfo.loadLabel(packageManager))
+                            .append(")\n");
+                    Log.d(TAG, "Suspicious app detected: " + packageInfo.packageName);
                 }
             }
         }

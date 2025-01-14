@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnDetectOverlays"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detect Overlay Apps" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnScanApps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan Installed Apps" />
+        <Button
+            android:id="@+id/btnDetectOverlays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detect Overlay Apps" />
 
-    <Button
-        android:id="@+id/btnEnableService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable Accessibility Service" />
+        <Button
+            android:id="@+id/btnScanApps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan Installed Apps" />
 
-    <TextView
-        android:id="@+id/tvResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Results will appear here"
-        android:textSize="16sp" />
-</LinearLayout>
+        <Button
+            android:id="@+id/btnEnableService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enable Accessibility Service" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Results will appear here..."
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+</ScrollView>
