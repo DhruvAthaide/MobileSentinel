@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="#021526" >
 
     <ImageView
         android:id="@+id/appIcon"
@@ -15,6 +16,7 @@
         android:id="@+id/appName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="16sp" />
+        android:textSize="18sp"
+        android:textColor="#EEEEEE" />
 
 </LinearLayout>

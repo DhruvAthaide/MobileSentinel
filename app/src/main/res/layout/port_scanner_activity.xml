@@ -3,13 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#021526">
 
     <Button
         android:id="@+id/buttonScanPorts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan Ports" />
+        android:text="Scan the Ports"
+        android:backgroundTint="#2F58CD"
+        android:textColor="#EEEEEE"
+        android:layout_gravity="center_horizontal"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

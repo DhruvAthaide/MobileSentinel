@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
-public class PortScannerActivity extends AppCompatActivity{
+public class PortScannerActivity extends AppCompatActivity {
     private Button buttonScanPorts;
     private ProgressBar progressBar;
     private ListView listViewPorts;
@@ -35,10 +35,16 @@ public class PortScannerActivity extends AppCompatActivity{
         progressBar = findViewById(R.id.progressBar);
         listViewPorts = findViewById(R.id.listViewPorts);
         portStatusList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, portStatusList);
+
+        // Use the custom layout for each ListView item
+        adapter = new ArrayAdapter<>(this, R.layout.port_scanner_list_item, portStatusList);
         listViewPorts.setAdapter(adapter);
+
+        // Executor service for running the port scan in background threads
         executorService = Executors.newFixedThreadPool(4);
         mainHandler = new Handler(Looper.getMainLooper());
+
+        // Set click listener for the button
         buttonScanPorts.setOnClickListener(v -> startPortScan());
     }
 

@@ -1,73 +1,97 @@
-t<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
-    android:background="?android:windowBackground">
+    android:background="#021526">
 
     <!-- Network Name -->
     <TextView
         android:id="@+id/wifiName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WiFi Network"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#296DFF"
-        android:paddingBottom="8dp" />
+        android:textColor="#EEEEEE"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Security Type Label -->
     <TextView
         android:id="@+id/securityTypeLabel"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Security Type:"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#296DFF"
+        android:textColor="#EEEEEE"
         android:paddingTop="8dp"
-        android:paddingBottom="4dp" />
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toBottomOf="@id/wifiName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Security Type -->
     <TextView
         android:id="@+id/securityType"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Security Type"
-        android:textSize="16sp"
-        android:textColor="#296DFF"
-        android:paddingBottom="8dp" />
+        android:textSize="18sp"
+        android:textColor="#EEEEEE"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/securityTypeLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Network Mode Label -->
     <TextView
         android:id="@+id/networkModeLabel"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Network Mode:"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#296DFF"
+        android:textColor="#EEEEEE"
         android:paddingTop="8dp"
-        android:paddingBottom="4dp" />
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toBottomOf="@id/securityType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Network Mode -->
     <TextView
         android:id="@+id/networkMode"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Network Mode"
-        android:textSize="16sp"
-        android:textColor="#296DFF"
-        android:paddingBottom="8dp" />
+        android:textSize="18sp"
+        android:textColor="#EEEEEE"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/networkModeLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- ScrollView for Terminal Output -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/networkMode"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:background="#EEEEEE"
+        android:padding="4dp"
+        android:elevation="4dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="true"
+        app:layout_constraintTop_toBottomOf="@id/networkMode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/startWifiCrackerButton">
 
         <!-- TextView inside ScrollView for displaying terminal output -->
         <TextView
@@ -76,7 +100,9 @@ t<?xml version="1.0" encoding="utf-8"?>
             android:layout_height="wrap_content"
             android:text="Terminal Output"
             android:textSize="14sp"
-            android:padding="8dp" />
+            android:textColor="#021526"
+            android:padding="8dp"
+            android:layout_gravity="center_horizontal" />
     </ScrollView>
 
     <!-- Start WiFi Cracker Button -->
@@ -84,9 +110,16 @@ t<?xml version="1.0" encoding="utf-8"?>
         android:id="@+id/startWifiCrackerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2F58CD"
         android:text="Start WiFi Cracker"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:backgroundTint="?attr/colorPrimary"
-        android:layout_marginTop="24dp" />
-</LinearLayout>
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:contentDescription="Button to scan for available WiFi networks"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

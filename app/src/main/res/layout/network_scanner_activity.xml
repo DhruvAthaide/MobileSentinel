@@ -3,20 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#021526">
 
+    <!-- Scan Results Title -->
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="@string/scan_results"
-        android:textSize="18sp" />
+        android:paddingBottom="16dp"
+        android:text="Scan Results"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
+    <!-- ListView for Scan Results -->
     <ListView
         android:id="@+id/networkListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
+        android:background="#EEF0FA"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Scan for WiFi Networks Button -->
+    <Button
+        android:id="@+id/scanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#2F58CD"
+        android:text="Scan for WiFi Networks"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:contentDescription="Button to scan for available WiFi networks" />
 </LinearLayout>
