@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/input_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Enter text to encrypt"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="?android:attr/editTextBackground" />
+
+    <Button
+        android:id="@+id/encrypt_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:text="Encrypt" />
+
+    <EditText
+        android:id="@+id/encrypted_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Encrypted text"
+        android:inputType="text"
+        android:focusable="false"
+        android:padding="12dp"
+        android:background="?android:attr/editTextBackground"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/decrypt_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:text="Decrypt" />
+
+    <EditText
+        android:id="@+id/decrypted_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Decrypted text"
+        android:inputType="text"
+        android:focusable="false"
+        android:padding="12dp"
+        android:background="?android:attr/editTextBackground"
+        android:layout_marginTop="12dp" />
+</LinearLayout>

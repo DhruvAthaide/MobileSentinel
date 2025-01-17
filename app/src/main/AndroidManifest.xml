@@ -60,6 +60,7 @@
         <activity android:name=".PasswordGeneratorActivity" android:exported="false" />
         <activity android:name=".PortScannerActivity" android:exported="false" />
         <activity android:name=".AntiKeyloggerActivity" android:exported="false" />
+        <activity android:name=".EncryptedVaultActivity" android:exported="false" />
 
         <!-- Main Activity -->
         <activity
