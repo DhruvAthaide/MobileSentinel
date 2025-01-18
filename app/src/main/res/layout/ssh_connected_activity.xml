@@ -1,0 +1,41 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#021526">
+
+    <!-- Shell Output -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/black"
+        android:textColor="#EEEEEE"
+        android:textSize="18sp"
+        android:scrollbars="vertical"
+        android:padding="10dp" />
+
+    <!-- Command Input -->
+    <EditText
+        android:id="@+id/commandInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:hint="Enter command"
+        android:background="#6988dd"
+        android:padding="10dp"
+        android:textColor="#EEEEEE"
+        android:textColorHint="#EEEEEE" />
+
+    <!-- Send Button -->
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Send"
+        android:background="#2F58CD"
+        android:textColor="@android:color/background_light"
+        android:layout_margin="10dp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

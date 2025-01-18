@@ -54,6 +54,7 @@
         <activity android:name=".VulnerabilityScannerActivity" android:exported="false" />
         <activity android:name=".TrafficSniffingActivity" android:exported="false" />
         <activity android:name=".SSHClientActivity" android:exported="false" />
+        <activity android:name=".SSHConnectedActivity" android:exported="false" />
         <activity android:name=".PermissionAnalyzerActivity" android:exported="false" />
         <activity android:name=".AppPermissionDetailsActivity" android:exported="false" />
         <activity android:name=".WifiDetailsActivity" android:exported="false" />

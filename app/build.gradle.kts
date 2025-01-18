@@ -41,6 +41,19 @@ android {
         create("py310") { dimension = "pyVersion" }
         create("py311") { dimension = "pyVersion" }
     }
+
+    packaging {
+        resources {
+            excludes += listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/ASL2.0"
+            )
+        }
+    }
 }
 
 chaquopy {
@@ -51,8 +64,18 @@ chaquopy {
 }
 
 dependencies {
+    // SSH Client Dependencies
+    implementation ("org.apache.mina:mina-core:3.0.0-M2")
+    implementation ("org.apache.sshd:sshd-core:2.1.0")
+    implementation ("org.apache.sshd:sshd-putty:2.1.0")
+    implementation ("org.apache.sshd:sshd-common:2.1.0")
+    implementation ("org.slf4j:slf4j-api:1.7.5")
+    implementation ("org.slf4j:slf4j-simple:1.6.4")
+
+    // Encrypted Vault Dependencies
     implementation ("androidx.room:room-runtime:2.5.1")
     annotationProcessor ("androidx.room:room-compiler:2.5.1")
+
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.jcraft:jsch:0.1.55")
