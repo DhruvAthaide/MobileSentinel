@@ -46,10 +46,10 @@ public class DebuggingDevelopmentActivity extends AppCompatActivity {
 
         // Update UI with status
         developerOptionsStatus.setText(isDeveloperOptionsEnabled ? "Enabled" : "Disabled");
-        developerOptionsStatus.setTextColor(isDeveloperOptionsEnabled ? getColor(R.color.success_green) : getColor(R.color.error_red));
+        developerOptionsStatus.setTextColor(isDeveloperOptionsEnabled ? 0xFF8CFF98 : 0xFFE01C15);
 
         usbDebuggingStatus.setText(isUsbDebuggingEnabled ? "Enabled" : "Disabled");
-        usbDebuggingStatus.setTextColor(isUsbDebuggingEnabled ? getColor(R.color.success_green) : getColor(R.color.error_red));
+        usbDebuggingStatus.setTextColor(isUsbDebuggingEnabled ? 0xFF8CFF98 : 0xFFE01C15);
 
         // Notify user if settings are not enabled
         if (!isDeveloperOptionsEnabled || !isUsbDebuggingEnabled) {
