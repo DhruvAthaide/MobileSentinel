@@ -45,6 +45,18 @@
                 android:textSize="18sp"
                 android:contentDescription="Button to access Network Scanner feature" />
 
+            <!-- Device Vulnerability Button -->
+            <Button
+                android:id="@+id/btn_device_vulnerability"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#2F58CD"
+                android:text="Device Vulnerability"
+                android:textColor="#EEEEEE"
+                android:textSize="18sp"
+                android:contentDescription="Button to check Device Vulnerability" />
+
             <!-- Traffic Sniffing Button -->
             <Button
                 android:id="@+id/btn_traffic_sniffing"
@@ -56,30 +68,6 @@
                 android:textColor="#EEEEEE"
                 android:textSize="18sp"
                 android:contentDescription="Button to access Traffic Sniffing feature" />
-
-            <!-- Vulnerability Scanner Button -->
-            <Button
-                android:id="@+id/btn_vulnerability_scanner"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2F58CD"
-                android:text="Vulnerability Scanner"
-                android:textColor="#EEEEEE"
-                android:textSize="18sp"
-                android:contentDescription="Button to access Vulnerability Scanner feature" />
-
-            <!-- Permission Analyzer Button -->
-            <Button
-                android:id="@+id/btn_permission_analyzer"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2F58CD"
-                android:text="Permission Analyzer"
-                android:textColor="#EEEEEE"
-                android:textSize="18sp"
-                android:contentDescription="Button to access Permission Analyzer feature" />
 
             <!-- SSH Client Button -->
             <Button
@@ -93,30 +81,6 @@
                 android:textSize="18sp"
                 android:contentDescription="Button to access SSH Client feature" />
 
-            <!-- Password Generator Button -->
-            <Button
-                android:id="@+id/btn_password_generator"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2F58CD"
-                android:text="Password Generator"
-                android:textColor="#EEEEEE"
-                android:textSize="18sp"
-                android:contentDescription="Button to access Password Generator feature" />
-
-            <!-- Port Scanner Button -->
-            <Button
-                android:id="@+id/btn_port_scanner"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2F58CD"
-                android:text="Port Scanner"
-                android:textColor="#EEEEEE"
-                android:textSize="18sp"
-                android:contentDescription="Button to access Port Scanner feature" />
-
             <!-- Anti Keylogger Button -->
             <Button
                 android:id="@+id/btn_antikeylogger"
@@ -129,17 +93,6 @@
                 android:textSize="18sp"
                 android:contentDescription="Button to access Anti-Keylogger feature" />
 
-            <!-- Encrypted Vault Button -->
-            <Button
-                android:id="@+id/btn_encrypted_vault"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2F58CD"
-                android:text="Encrypted Vault"
-                android:textColor="#EEEEEE"
-                android:textSize="18sp"
-                android:contentDescription="Button to access Encrypted Vault feature" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

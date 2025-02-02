@@ -51,7 +51,10 @@
 
         <!-- Activities -->
         <activity android:name=".NetworkScannerActivity" android:exported="false" />
-        <activity android:name=".VulnerabilityScannerActivity" android:exported="false" />
+        <activity android:name=".DeviceVulnerability" android:exported="false" />
+        <activity android:name=".DebuggingDevelopmentActivity" android:exported="false" />
+        <activity android:name=".NetworkSecuritySSLActivity" android:exported="false" />
+        <activity android:name=".ProcessAnalyzerActivity" android:exported="false" />
         <activity android:name=".TrafficSniffingActivity" android:exported="false" />
         <activity android:name=".SSHClientActivity" android:exported="false" />
         <activity android:name=".SSHConnectedActivity" android:exported="false" />

