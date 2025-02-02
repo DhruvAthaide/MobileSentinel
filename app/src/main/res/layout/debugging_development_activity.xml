@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#021526">
+
+    <!-- Developer Options Status Label -->
+    <TextView
+        android:id="@+id/developerOptionsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer Options:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#EEEEEE"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Developer Options Status -->
+    <TextView
+        android:id="@+id/developerOptionsStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unknown"
+        android:textSize="18sp"
+        android:textColor="#EEEEEE"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/developerOptionsLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- USB Debugging Status Label -->
+    <TextView
+        android:id="@+id/usbDebuggingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USB Debugging:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#EEEEEE"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toBottomOf="@id/developerOptionsStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- USB Debugging Status -->
+    <TextView
+        android:id="@+id/usbDebuggingStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unknown"
+        android:textSize="18sp"
+        android:textColor="#EEEEEE"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/usbDebuggingLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Open Settings Button -->
+    <Button
+        android:id="@+id/openSettingsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#2F58CD"
+        android:text="Open Developer Options"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/usbDebuggingStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
