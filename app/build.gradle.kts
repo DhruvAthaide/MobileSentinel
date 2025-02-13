@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mobilesentinel"
-        minSdk = 26
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -75,7 +75,6 @@ dependencies {
     // Encrypted Vault Dependencies
     implementation ("androidx.room:room-runtime:2.5.1")
     annotationProcessor ("androidx.room:room-compiler:2.5.1")
-
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.jcraft:jsch:0.1.55")
