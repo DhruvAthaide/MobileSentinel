@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set OnClickListener for Device Vulnerability button
-        btnNetworkScanner.setOnClickListener(view -> {
+        btnDeviceVulnerability.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, DeviceVulnerability.class);
             startActivity(intent);
         });
